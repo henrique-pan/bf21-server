@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "c6927c65-a8bb-4397-9a7a-f26c645adbb6",
+		"name": "BF21 - API Manual",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Client by ID (Without ID)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/client",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/client?idClient=29",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"client"
+					],
+					"query": [
+						{
+							"key": "idClient",
+							"value": "29"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Client Goals",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/client/goal/list",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"client",
+						"goal",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Clients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/client/list",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"client",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Clients by Query",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/client/list?query=Henrique",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"client",
+						"list"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "Henrique"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Clients by Query (Empty)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/client/list?query=XXXXXXXXXXXXXX",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"client",
+						"list"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "XXXXXXXXXXXXXX"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Client",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Henrique\",\n    \"age\": 25,\n    \"email\": \"henrique@bf21.com\",\n    \"phoneNumber\": \"111111\",\n    \"height\": 170,\n    \"weight\": 75,\n    \"bodyFatPercentage\": 45,\n    \"clientGoal\": {\n        \"idClientGoal\": 1\n    },\n    \"tdee\": 75\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/client",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Client Without Client",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/client",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update client",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"idClient\" : 29,\n    \"name\": \"Henrique\",\n    \"age\": 27,\n    \"email\": \"henrique@bf21.com\",\n    \"phoneNumber\": \"111111\",\n    \"height\": 175,\n    \"weight\": 75,\n    \"bodyFatPercentage\": 45,\n    \"clientGoal\": {\n        \"idClientGoal\": 1\n    },\n    \"tdee\": 80\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/client",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update client (Without ID)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Henrique\",\n    \"age\": 27,\n    \"email\": \"henrique@bf21.com\",\n    \"phoneNumber\": \"111111\",\n    \"height\": 175,\n    \"weight\": 75,\n    \"bodyFatPercentage\": 45,\n    \"clientGoal\": {\n        \"idClientGoal\": 1\n    },\n    \"tdee\": 80\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/client",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"client"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client by ID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/client?idClient=1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"client"
+					],
+					"query": [
+						{
+							"key": "idClient",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client by ID (Non existent)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/client?idClient=0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"client"
+					],
+					"query": [
+						{
+							"key": "idClient",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Client by ID (Without ID)",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://{{ip}}:{{port}}/client",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"client"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
