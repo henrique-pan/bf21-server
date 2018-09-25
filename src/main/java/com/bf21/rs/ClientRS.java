@@ -3,6 +3,7 @@ package com.bf21.rs;
 import com.bf21.entity.Client;
 import com.bf21.entity.ClientGoal;
 import com.bf21.entity.dto.ClientDTO;
+import com.bf21.entity.dto.CoachDTO;
 import com.bf21.entity.dto.CollectionDTO;
 import com.bf21.repository.ClientDAO;
 import com.bf21.repository.ClientGoalDAO;
@@ -28,6 +29,12 @@ public class ClientRS {
         Client client = clientDAO.find(idClient);
 
         ClientDTO result = new ClientDTO(client);
+        if(client == null) {
+            result.httpStatus = HttpStatus.NOT_FOUND.value();
+            result.apiMessage = "The client does not exist.";
+            return result;
+        }
+
         result.httpStatus = HttpStatus.OK.value();
         result.apiMessage = "The client has been found successfully.";
 

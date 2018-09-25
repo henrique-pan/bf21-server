@@ -49,7 +49,7 @@ public class ResponseFormatterAdvice implements ResponseBodyAdvice<Object> {
                 return new ResponseDTO(httpDTO.httpStatus, collection, httpDTO.apiMessage);
             }
 
-            if(httpDTO.httpStatus == 400) body = null;
+            if(httpDTO.httpStatus == 400 || httpDTO.httpStatus == 404) body = null;
 
             return new ResponseDTO(httpDTO.httpStatus, body, httpDTO.apiMessage);
         }
