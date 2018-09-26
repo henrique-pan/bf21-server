@@ -23,7 +23,7 @@ public class NutrientDAO {
     public List<Nutrient> findAll() {
         StringBuilder jpql = new StringBuilder();
         jpql.append(" SELECT n FROM Nutrient n ");
-        jpql.append(" ORDER BY c.idNutrient ");
+        jpql.append(" ORDER BY n.idNutrient ");
 
         TypedQuery<Nutrient> qry = entityManager.createQuery(jpql.toString(), Nutrient.class);
 
