@@ -3,7 +3,6 @@ package com.bf21.rs;
 import com.bf21.entity.Client;
 import com.bf21.entity.ClientGoal;
 import com.bf21.entity.dto.ClientDTO;
-import com.bf21.entity.dto.CoachDTO;
 import com.bf21.entity.dto.CollectionDTO;
 import com.bf21.repository.ClientDAO;
 import com.bf21.repository.ClientGoalDAO;
@@ -39,24 +38,6 @@ public class ClientRS {
         result.apiMessage = "The client has been found successfully.";
 
         return result;
-    }
-
-    @RequestMapping(value = "/goal/list",method = RequestMethod.GET)
-    public CollectionDTO<ClientGoal> getGoals() {
-        CollectionDTO<ClientGoal> resultCollection = new CollectionDTO<>(new ArrayList<>());
-
-        List<ClientGoal> goals = clientGoalDAO.findAll();
-
-        if (!goals.isEmpty()) {
-            goals.forEach(resultCollection::add);
-
-            resultCollection.httpStatus = HttpStatus.OK.value();
-            resultCollection.apiMessage = "ClientGoal list found successfully.";
-        } else {
-            resultCollection.httpStatus = HttpStatus.NO_CONTENT.value();
-        }
-
-        return resultCollection;
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)

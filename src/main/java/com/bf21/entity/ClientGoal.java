@@ -19,6 +19,14 @@ public class ClientGoal {
     @Column(name = "DS_GOAL")
     private String goal;
 
+    public ClientGoal() {
+    }
+
+    public ClientGoal(Integer idClientGoal, String goal) {
+        this.idClientGoal = idClientGoal;
+        this.goal = goal;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("ClientGoal [");

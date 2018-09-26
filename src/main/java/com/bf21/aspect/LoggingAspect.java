@@ -90,15 +90,11 @@ public class LoggingAspect {
     }
 
     private static void setReturnValue(Object result, StringBuffer logMessage) {
-        logMessage.append("[");
-        logMessage.append(result);
-        logMessage.append("]");
-    }
-
-    private static void setExecutionTime(long executionTime, StringBuffer logMessage) {
-        logMessage.append("[@");
-        logMessage.append(executionTime);
-        logMessage.append("ms]");
+        if(result != null) {
+            logMessage.append("[");
+            logMessage.append(result);
+            logMessage.append("]");
+        }
     }
 
     private static void setException(Throwable exception, StringBuffer logMessage) {
