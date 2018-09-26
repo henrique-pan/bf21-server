@@ -22,6 +22,22 @@ public class CoachDAO {
         return coach;
     }
 
+    public Coach findByLogin(String login) {
+        StringBuilder jpql = new StringBuilder();
+        jpql.append(" SELECT c FROM Coach c ");
+        jpql.append(" WHERE c.login = :login ");
+
+        TypedQuery<Coach> qry = entityManager.createQuery(jpql.toString(), Coach.class);
+        qry.setParameter("login", login);
+
+        try {
+            Coach coach = qry.getSingleResult();
+            return coach;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public List<Coach> findAll() {
         StringBuilder jpql = new StringBuilder();
         jpql.append(" SELECT c FROM Coach c ");
