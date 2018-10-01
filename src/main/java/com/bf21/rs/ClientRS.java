@@ -123,7 +123,7 @@ public class ClientRS {
             if(clientGoal == null) {
                 result = new ClientDTO();
                 result.httpStatus = HttpStatus.BAD_REQUEST.value();
-                result.apiMessage = "The the client goal id does not exist";
+                result.apiMessage = "The client goal id does not exist";
                 return result;
             }
         }
