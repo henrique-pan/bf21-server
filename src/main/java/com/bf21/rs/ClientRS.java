@@ -2,10 +2,14 @@ package com.bf21.rs;
 
 import com.bf21.entity.Client;
 import com.bf21.entity.ClientGoal;
+import com.bf21.entity.DailyActivityLevel;
+import com.bf21.entity.ProteinRequirement;
 import com.bf21.entity.dto.ClientDTO;
 import com.bf21.entity.dto.CollectionDTO;
 import com.bf21.repository.ClientDAO;
 import com.bf21.repository.ClientGoalDAO;
+import com.bf21.repository.DailyActivityLevelDAO;
+import com.bf21.repository.ProteinRequirementDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +26,12 @@ public class ClientRS {
 
     @Autowired
     private ClientGoalDAO clientGoalDAO;
+
+    @Autowired
+    private DailyActivityLevelDAO dailyActivityLevelDAO;
+
+    @Autowired
+    private ProteinRequirementDAO proteinRequirementDAO;
 
     @RequestMapping(method = RequestMethod.GET)
     public ClientDTO getById(@RequestParam("idClient") Integer idClient) {
@@ -69,18 +79,57 @@ public class ClientRS {
     public ClientDTO createClient(@RequestBody Client client) throws Exception {
         ClientDTO result;
 
+        // ClientGoal
         ClientGoal clientGoal = client.getClientGoal();
         if(clientGoal == null) {
             result = new ClientDTO();
             result.httpStatus = HttpStatus.BAD_REQUEST.value();
-            result.apiMessage = "The the client goal does not exist";
+            result.apiMessage = "The client goal does not exist";
         } else {
             clientGoal = clientGoalDAO.find(clientGoal.getIdClientGoal());
             if(clientGoal == null) {
                 result = new ClientDTO();
                 result.httpStatus = HttpStatus.BAD_REQUEST.value();
-                result.apiMessage = "The the client goal id does not exist";
+                result.apiMessage = "The client goal id does not exist";
                 return result;
+            } else {
+                client.setClientGoal(clientGoal);
+            }
+        }
+
+        // DailyActivityLevel
+        DailyActivityLevel dailyActivityLevel = client.getActivityLevel();
+        if(dailyActivityLevel == null) {
+            result = new ClientDTO();
+            result.httpStatus = HttpStatus.BAD_REQUEST.value();
+            result.apiMessage = "The daily activity level does not exist";
+        } else {
+            dailyActivityLevel = dailyActivityLevelDAO.find(dailyActivityLevel.getIdDailyActivityLevel());
+            if(dailyActivityLevel == null) {
+                result = new ClientDTO();
+                result.httpStatus = HttpStatus.BAD_REQUEST.value();
+                result.apiMessage = "The daily activity level id does not exist";
+                return result;
+            } else {
+                client.setActivityLevel(dailyActivityLevel);
+            }
+        }
+
+        // ProteinRequirement
+        ProteinRequirement proteinRequirement = client.getProteinRequirement();
+        if(proteinRequirement == null) {
+            result = new ClientDTO();
+            result.httpStatus = HttpStatus.BAD_REQUEST.value();
+            result.apiMessage = "The protein requirement does not exist";
+        } else {
+            proteinRequirement = proteinRequirementDAO.find(proteinRequirement.getIdProteinRequirement());
+            if(proteinRequirement == null) {
+                result = new ClientDTO();
+                result.httpStatus = HttpStatus.BAD_REQUEST.value();
+                result.apiMessage = "The protein requirement id does not exist";
+                return result;
+            } else {
+                client.setProteinRequirement(proteinRequirement);
             }
         }
 
@@ -113,17 +162,50 @@ public class ClientRS {
             return result;
         }
 
+        // ClientGoal
         ClientGoal clientGoal = client.getClientGoal();
         if(clientGoal == null) {
             result = new ClientDTO();
             result.httpStatus = HttpStatus.BAD_REQUEST.value();
-            result.apiMessage = "The the client goal does not exist";
+            result.apiMessage = "The client goal does not exist";
         } else {
             clientGoal = clientGoalDAO.find(clientGoal.getIdClientGoal());
             if(clientGoal == null) {
                 result = new ClientDTO();
                 result.httpStatus = HttpStatus.BAD_REQUEST.value();
                 result.apiMessage = "The client goal id does not exist";
+                return result;
+            }
+        }
+
+        // DailyActivityLevel
+        DailyActivityLevel dailyActivityLevel = client.getActivityLevel();
+        if(dailyActivityLevel == null) {
+            result = new ClientDTO();
+            result.httpStatus = HttpStatus.BAD_REQUEST.value();
+            result.apiMessage = "The daily activity level does not exist";
+        } else {
+            dailyActivityLevel = dailyActivityLevelDAO.find(dailyActivityLevel.getIdDailyActivityLevel());
+            if(dailyActivityLevel == null) {
+                result = new ClientDTO();
+                result.httpStatus = HttpStatus.BAD_REQUEST.value();
+                result.apiMessage = "The daily activity level id does not exist";
+                return result;
+            }
+        }
+
+        // ProteinRequirement
+        ProteinRequirement proteinRequirement = client.getProteinRequirement();
+        if(proteinRequirement == null) {
+            result = new ClientDTO();
+            result.httpStatus = HttpStatus.BAD_REQUEST.value();
+            result.apiMessage = "The protein requirement does not exist";
+        } else {
+            proteinRequirement = proteinRequirementDAO.find(proteinRequirement.getIdProteinRequirement());
+            if(proteinRequirement == null) {
+                result = new ClientDTO();
+                result.httpStatus = HttpStatus.BAD_REQUEST.value();
+                result.apiMessage = "The protein requirement id does not exist";
                 return result;
             }
         }

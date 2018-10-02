@@ -24,6 +24,9 @@ public class Client {
     @Column(name = "NR_AGE")
     private Integer age;
 
+    @Column(name = "FL_GENDER")
+    private String gender;
+
     @Column(name = "DS_EMAIL")
     private String email;
 
@@ -39,12 +42,23 @@ public class Client {
     @Column(name = "NR_BODY_FAT_PERCENTAGE")
     private Integer bodyFatPercentage;
 
+    @Column(name = "NR_BMR")
+    private Integer bmr;
+
+    @Column(name = "NR_TDCE")
+    private Integer tdce;
+
     @OneToOne
     @JoinColumn(name = "ID_CLIENT_GOAL")
     private ClientGoal clientGoal;
 
-    @Column(name = "NR_TDEE")
-    private Integer tdee;
+    @OneToOne
+    @JoinColumn(name = "ID_DAILY_ACTIVITY_LEVEL")
+    private DailyActivityLevel activityLevel;
+
+    @OneToOne
+    @JoinColumn(name = "ID_PROTEIN_REQUIREMENT")
+    private ProteinRequirement proteinRequirement;
 
     @Column(name = "DT_CREATION")
     @Temporal(TemporalType.TIMESTAMP)
@@ -60,12 +74,17 @@ public class Client {
         sb.append("idClient = ").append(idClient);
         sb.append(", name = ").append(name);
         sb.append(", age = ").append(age);
+        sb.append(", gender = ").append(gender);
         sb.append(", email = ").append(email);
         sb.append(", phoneNumber = ").append(phoneNumber);
         sb.append(", height = ").append(height);
         sb.append(", weight = ").append(weight);
         sb.append(", bodyFatPercentage = ").append(bodyFatPercentage);
-        sb.append(", clientGoal = ").append(clientGoal);
+        sb.append(", bmr = ").append(bmr);
+        sb.append(", tdce = ").append(tdce);
+        sb.append(", clientGoal = ").append(clientGoal.getGoal());
+        sb.append(", activityLevel = ").append(activityLevel.getDescription());
+        sb.append(", proteinRequirement = ").append(proteinRequirement.getDescription());
         sb.append(", creationDate = ").append(creationDate);
         sb.append(", modificationDate = ").append(modificationDate);
         sb.append(']');

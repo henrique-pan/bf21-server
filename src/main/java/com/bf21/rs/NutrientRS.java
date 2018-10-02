@@ -2,6 +2,7 @@ package com.bf21.rs;
 
 import com.bf21.entity.Nutrient;
 import com.bf21.entity.dto.CollectionDTO;
+import com.bf21.entity.dto.NutrientDTO;
 import com.bf21.repository.NutrientDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,13 +21,15 @@ public class NutrientRS {
     private NutrientDAO nutrientDAO;
 
     @RequestMapping(value = "/nutrient/list", method = RequestMethod.GET)
-    public CollectionDTO<Nutrient> getNutrients() {
-        CollectionDTO<Nutrient> resultCollection = new CollectionDTO<>(new ArrayList<>());
+    public CollectionDTO<NutrientDTO> getNutrients() {
+        CollectionDTO<NutrientDTO> resultCollection = new CollectionDTO<>(new ArrayList<>());
 
         List<Nutrient> nutrients = nutrientDAO.findAll();
 
         if (!nutrients.isEmpty()) {
-            nutrients.forEach(resultCollection::add);
+            nutrients.forEach(nutrient -> {
+                resultCollection.add(new NutrientDTO(nutrient));
+            });
 
             resultCollection.httpStatus = HttpStatus.OK.value();
             resultCollection.apiMessage = "Nutrient list found successfully.";
