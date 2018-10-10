@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -31,16 +32,17 @@ public class ClientDTO extends HttpDTO {
     private DailyActivityLevel activityLevel;
     private ProteinRequirement proteinRequirement;
 
-    @JsonFormat(pattern="dd/MM/yyyy hh:mm:ss")
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private Date creationDate;
 
-    @JsonFormat(pattern="dd/MM/yyyy hh:mm:ss")
+    @JsonFormat(pattern = "dd/MM/yyyy hh:mm:ss")
     private Date modificationDate;
 
-    public ClientDTO() {}
+    public ClientDTO() {
+    }
 
     public ClientDTO(Client client) {
-        if(client != null) {
+        if (client != null) {
             this.idClient = client.getIdClient();
             this.name = client.getName();
             this.age = client.getAge();

@@ -22,7 +22,7 @@
     <Loggers>
         <AsyncRoot level="INFO" includeLocation="false">
             <AppenderRef ref="Console"/>
-            <!-- <AppenderRef ref="File"/> -->
+            <!--<AppenderRef ref="File"/> -->
         </AsyncRoot>
     </Loggers>
 </Configuration>

@@ -35,8 +35,8 @@ public class Food {
     private Set<FoodNutrient> nutrients;
 
     @Fetch(FetchMode.SUBSELECT)
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JoinTable(name = "FOOD_MACRO", joinColumns = { @JoinColumn(name = "ID_FOOD") }, inverseJoinColumns = { @JoinColumn(name = "ID_MACRO") })
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(name = "FOOD_MACRO", joinColumns = {@JoinColumn(name = "ID_FOOD")}, inverseJoinColumns = {@JoinColumn(name = "ID_MACRO")})
     private Set<Macro> macros;
 
     @Column(name = "DT_CREATION")
@@ -48,7 +48,7 @@ public class Food {
     private Date modificationDate;
 
     public void addNutrient(Nutrient nutrient, BigDecimal total) {
-        if(nutrients == null) {
+        if (nutrients == null) {
             nutrients = new HashSet<>();
         }
 
@@ -61,7 +61,7 @@ public class Food {
     }
 
     public void addMacro(Macro macro) {
-        if(macros == null) {
+        if (macros == null) {
             macros = new HashSet<>();
         }
         macros.add(macro);
@@ -72,11 +72,12 @@ public class Food {
         final StringBuilder sb = new StringBuilder("Food [");
         sb.append("idFood = ").append(idFood);
         sb.append(", name = ").append(name);
-        sb.append(", brand = ").append(brand);
+        if (brand != null) sb.append(", brand = ").append(brand);
         sb.append(", portionSize = ").append(portionSize);
         sb.append(", nutrients = ").append(nutrients);
+        sb.append(", macros = ").append(macros);
         sb.append(", creationDate = ").append(creationDate);
-        sb.append(", modificationDate = ").append(modificationDate);
+        if (modificationDate != null) sb.append(", modificationDate = ").append(modificationDate);
         sb.append(']');
         return sb.toString();
     }
