@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.Date;
 import java.util.List;
@@ -52,9 +53,16 @@ public class PlanDayDAO {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void remove(PlanDay planDay) throws Exception {
         try {
-            entityManager.remove(entityManager.merge(planDay));
+            StringBuilder jpql = new StringBuilder();
+            jpql.append(" DELETE FROM PlanDay pd ");
+            jpql.append(" WHERE pd.idPlanDay = :idPlanDay ");
+
+            Query query = entityManager.createQuery(jpql.toString());
+            query.setParameter("idPlanDay", planDay.getIdPlanDay());
+
+            query.executeUpdate();
         } catch (Exception e) {
-            throw new RuntimeException("Error to persist planDay: " + e.getCause());
+            throw new RuntimeException("Error to remove planDay: " + e.getCause());
         }
     }
 

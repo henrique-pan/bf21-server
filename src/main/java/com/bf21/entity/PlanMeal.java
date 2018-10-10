@@ -4,12 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -33,7 +31,7 @@ public class PlanMeal {
     private Integer order;
 
     @Fetch(FetchMode.SUBSELECT)
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "FOOD_PLAN_MEAL_FOOD", joinColumns = {@JoinColumn(name = "ID_FOOD_PLAN_MEAL")}, inverseJoinColumns = {@JoinColumn(name = "ID_FOOD")})
     private List<Food> foods;
 
