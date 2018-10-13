@@ -43,7 +43,7 @@ public class PersistenceJPAConfig {
 
         dataSource.setUsername("root");
         // LOCAL
-        dataSource.setPassword("root");
+        dataSource.setPassword("rootroot");
         // AWS
         //dataSource.setPassword("rootroot");
         return dataSource;
